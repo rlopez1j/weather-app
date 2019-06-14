@@ -1,10 +1,10 @@
 # Weather app
 
 ## TODO:
-- Accept zip code as input
+- Add input validation
 - Display current temperature
 - display 5-day forecast
 - create npm package
 
 ### updates: 
-created basic component, and added basic styling.
+basic zip code lookup works. need to add input validation to only check for only numbers
