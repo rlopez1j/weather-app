@@ -6,12 +6,10 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
-import { reducers } from './reducers/index';
 import { CurrentForecastComponent } from './current-forecast/current-forecast.component';
 import { FiveDayForecastComponent } from './five-day-forcast/five-day-forecast.component';
-import { EffectsModule } from '@ngrx/effects';
-import { WeatherEffects } from './effects/effects';
 import { WeatherService } from './weather.service';
+import { weatherReducer } from './reducers/data';
 
 @NgModule({
   declarations: [
@@ -25,8 +23,7 @@ import { WeatherService } from './weather.service';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([WeatherEffects])
+    StoreModule.forRoot({weather: weatherReducer}),
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

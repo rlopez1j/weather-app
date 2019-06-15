@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State, getWeatherState } from '../reducers';
+import { AppState } from '../app.state';
 import { Observable } from 'rxjs';
 import { WeatherInformation } from '../models/weather-information';
 
@@ -12,16 +12,14 @@ import { WeatherInformation } from '../models/weather-information';
 export class CurrentForecastComponent implements OnInit {
 
   public weather$: Observable<WeatherInformation>;
-  private weather_information: any = undefined;
+  weather: any = undefined;
 
-  constructor(public store: Store<State>) {
-    this.weather$ = store.select(getWeatherState);
+  constructor(public store: Store<AppState>) {
+    this.weather$ = store.select('weather')
   }
 
   ngOnInit() {
-    this.weather$.subscribe((weather: WeatherInformation)=>{
-      this.weather_information = this.weather$;
-    });
-
+    this.weather$
+    .subscribe((data: WeatherInformation) => this.weather = data)
   }
 }

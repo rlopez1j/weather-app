@@ -1,11 +1,23 @@
 import { WeatherInformation } from '../models/weather-information'
-import { WEATHER_DATA_RECEIVED, WeatherUpdatedAction } from '../actions/data'
+import { WEATHER_SEARCH, Actions } from '../actions/data'
 
-export function weatherReducer(state = {}, action: WeatherUpdatedAction){
+const InitialState: WeatherInformation = {
+    city: '',
+    temperature_current:  -1,
+    temperature_high:  -1,
+    temperature_low:  -1,
+    humidity:  -1,
+    wind:  -1,
+    description_main:  '',
+    description_detailed:  '',
+    icon:  '',
+}
+
+export function weatherReducer(state: WeatherInformation = InitialState, action: Actions){
     switch(action.type){
-        case WEATHER_DATA_RECEIVED:
-            return action.weather
+        case WEATHER_SEARCH:
+            return action.payload
         default:
-            return state
+            return state;
     }
 }
