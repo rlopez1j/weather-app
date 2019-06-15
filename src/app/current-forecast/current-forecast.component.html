@@ -3,6 +3,49 @@
 </p>
 
 
-<div *ngIf="weather$">
-  <p> {{weather.city}} </p>
+<div *ngIf="weather.city != 'INITIAL_STATE'">
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <h3> {{weather.city}} </h3>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-auto">
+              <div class="text-left">
+                <img src="https://openweathermap.org/img/w/01d.png">
+              </div>
+            </div>
+            <div class="col-sm">
+              <p class="d-inline display-1"> 
+                {{weather.temperature_current}} 
+                <span class="super d-inline text-muted">&#176; F</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <p> low: {{weather.temperature_low}} </p>
+          </div>
+          <div class="col-sm">
+            <p> high: {{weather.temperature_high}} </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p>humidity: {{weather.humidity}}% </p>
+      </div>
+
+      <div>
+        <h2>
+          {{weather.description_main}}
+          <small class="text-muted"> {{weather.description_detailed}} </small>
+        </h2>
+      </div>
+    </div>
+  </div>
 </div>
