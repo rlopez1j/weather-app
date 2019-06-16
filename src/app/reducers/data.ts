@@ -2,7 +2,7 @@ import { WeatherInformation } from '../models/weather-information'
 import { WEATHER_SEARCH, Actions } from '../actions/data'
 
 const InitialState: WeatherInformation = {
-    city: 'INITIAL_STATE', // change all of these
+    city: 'INITIAL_STATE',
     temperature_current:  -1,
     temperature_high:  -1,
     temperature_low:  -1,

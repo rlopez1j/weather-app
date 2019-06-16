@@ -16,9 +16,9 @@ export class WeatherService {
     return this.http.get<any>('https://api.openweathermap.org/data/2.5/weather',
     {
       params: {
-        zip: zip_code, // get country code (don't assume US)
-        units: 'imperial', // might change depending on country code
-        APPID: '346cfdc8742305b796a5082c46271d73' // may hide
+        zip: zip_code,
+        units: 'imperial', 
+        APPID: '346cfdc8742305b796a5082c46271d73'
       }
     }).pipe(
       map((data: any)=>{
@@ -45,8 +45,8 @@ export class WeatherService {
     {
       params: {
         zip: zip_code,
-        units: 'imperial', // might change depending on country code
-        APPID: '346cfdc8742305b796a5082c46271d73' // may hide
+        units: 'imperial',
+        APPID: '346cfdc8742305b796a5082c46271d73'
       }
     }).pipe(
       map((data: any)=>{
