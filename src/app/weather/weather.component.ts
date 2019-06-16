@@ -19,6 +19,7 @@ export class WeatherComponent implements OnInit {
   public zipcode: any;
   public zip$: Observable<String>;
   public weather$: Observable<WeatherInformation>;
+  public ERROR_FLAG = 0;
 
   constructor(private weather_service: WeatherService, public store: Store<AppState>) { 
   }
@@ -28,7 +29,7 @@ export class WeatherComponent implements OnInit {
 
   computeMean(forecast_data: ForecastInformation[]): Forecast[]{
     let forecast: Forecast[] = []
-  
+    
     let day = 1;
     let right = day*8;
     let left = 0;
@@ -69,11 +70,17 @@ export class WeatherComponent implements OnInit {
     this.weather_service.getWeather(zip_code)
     .subscribe((data: WeatherInformation)=>{
       this.store.dispatch(new WeatherSearch(data));
+      this.ERROR_FLAG = 0
+    }, error =>{
+      this.ERROR_FLAG = 1
     });
 
     this.weather_service.getForecastData(zip_code)
     .subscribe((data: ForecastInformation[])=>{
       this.store.dispatch(new ForecastSearch(this.computeMean(data)))
+      this.ERROR_FLAG = 0
+    }, error =>{
+      this.ERROR_FLAG = 1
     })
   }
 }
