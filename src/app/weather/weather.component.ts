@@ -16,7 +16,7 @@ import { ForecastSearch } from '../actions/forecast';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-  
+  public zipcode: any;
   public zip$: Observable<String>;
   public weather$: Observable<WeatherInformation>;
 

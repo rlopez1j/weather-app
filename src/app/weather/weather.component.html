@@ -8,13 +8,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
+    <div>
       <div class="input-group input-group-lg">
         <input type="text" class="form-control" id="zipcode" name="zipcode"
-          required pattern="^[0-9]"
+          required pattern="^[0-9]*" maxlength="5" minlength="5"
           [(ngModel)]="input" #zipcode="ngModel">
-        <button type="button" class="btn- btn-light" (click)="getWeather(input)">Get Weather</button>
+          <button type="button" [hidden]="zipcode?.errors" class="btn- btn-light" (click)="getWeather(input)">Get Weather</button>
       </div>
     </div>
+  </div>
+  <div class="row pt-2">
+    <div>
+        <div *ngIf="zipcode.errors && (zipcode.dirty || zipcode.touched)" class="alert alert-danger">
+            <div [hidden]="!zipcode.errors.pattern">
+              Enter valid zip code.
+            </div>
+        </div>
+      </div>
   </div>
 </div>
