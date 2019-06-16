@@ -1,7 +1,22 @@
-<p>
-  five-day-forcast works!
-</p>
-
-<div *ngIf="weather_information != undefined">
-  {{weather_information.city}}
+<div *ngIf="forecast[0].temp_day_mean != -100">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Humidity</th>
+        <th scope="col">Wind</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let cast of forecast">
+      <tr>
+          <td> {{cast.date}} </td>
+          <td> {{cast.temp_day_mean}} &#176;F</td>
+          <td> {{cast.humidity_day_mean}}% </td>
+          <td> {{cast.wind_day_mean}} mph</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
 </div>

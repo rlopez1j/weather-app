@@ -10,6 +10,7 @@ import { CurrentForecastComponent } from './current-forecast/current-forecast.co
 import { FiveDayForecastComponent } from './five-day-forcast/five-day-forecast.component';
 import { WeatherService } from './weather.service';
 import { weatherReducer } from './reducers/data';
+import { forecastReducer } from './reducers/forecast';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { weatherReducer } from './reducers/data';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({weather: weatherReducer}),
+    StoreModule.forRoot({weather: weatherReducer, forecast: forecastReducer}),
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

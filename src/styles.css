@@ -3,7 +3,7 @@
 @import "../node_modules/font-awesome/css/font-awesome.css";
 
 .super {
-    position: fixed;
+   vertical-align: super;
     padding-top: 1%;
     padding-left: .2%;
     font-size: xx-large;

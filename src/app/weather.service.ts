@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { WeatherInformation } from './models/weather-information';
 import { map } from 'rxjs/operators';
+import { ForecastInformation } from './models/forecast-information';
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +22,47 @@ export class WeatherService {
       }
     }).pipe(
       map((data: any)=>{
-        let param = {
+        let temp: number = data.main.temp
+        let weather: WeatherInformation = {
           city: data.name,
-          temp: data.main.temp,
-          temp_high: data.main.temp_high,
-          temp_low: data.main.temp_min,
+          temperature_current: parseFloat(temp.toPrecision(3)),
+          temperature_high: data.main.temp_max,
+          temperature_low: data.main.temp_min,
           humidity: data.main.humidity,
           wind: data.wind.speed,
-          desc: data.weather[0].main,
-          desc_detail: data.weather[0].description,
+          description_main: data.weather[0].main,
+          description_detailed: data.weather[0].description,
           icon: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png'
         }
-        return new WeatherInformation(param)
+        return weather
+      })
+    )
+  }
+
+  getForecastData(zip_code): Observable<ForecastInformation[]>{
+    let forecast_list: ForecastInformation[] = []
+    return this.http.get<any>('https://api.openweathermap.org/data/2.5/forecast',
+    {
+      params: {
+        zip: zip_code,
+        units: 'imperial', // might change depending on country code
+        APPID: '346cfdc8742305b796a5082c46271d73' // may hide
+      }
+    }).pipe(
+      map((data: any)=>{
+        for(let day in data.list){
+          let date: string = new Date(data.list[day].dt_txt)
+          .toDateString()
+          .slice(0,10);
+
+          forecast_list.push({
+            temperature: data.list[day].main.temp,
+            humidity: data.list[day].main.humidity,
+            wind: data.list[day].wind.speed,
+            date: date
+          })
+        }
+        return forecast_list
       })
     )
   }
